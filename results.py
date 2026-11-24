@@ -26,27 +26,29 @@ RESULT_TYPES = {
     },
 }
 
+# Each answer contributes to a theme. In case of a tie, the most recently
+# selected theme wins; the fixed order keeps the outcome deterministic.
+ANSWER_MAP = [
+    {"A": "observer", "B": "supporter"},
+    {"A": "strategist", "B": "explorer"},
+    {"A": "strategist", "B": "supporter"},
+    {"A": "observer", "B": "explorer"},
+    {"A": "strategist", "B": "dreamer"},
+]
+
 def calculate_result(answers):
-    # 각 문항은 특정 성향 축을 측정합니다. 5문항 결과를 합산해 가장 가까운 유형을 결정합니다.
     scores = {key: 0 for key in RESULT_TYPES}
-    mapping = [
-        {"A": "observer", "B": "supporter"},
-        {"A": "strategist", "B": "explorer"},
-        {"A": "strategist", "B": "supporter"},
-        {"A": "observer", "B": "explorer"},
-        {"A": "strategist", "B": "dreamer"},
-    ]
-    for index, answer in enumerate(answers[:5]):
-        scores[mapping[index][answer]] += 1
-    # 동점일 경우 마지막 응답과 가장 관련 있는 유형을 우선합니다.
+    recent = None
+    for index, answer in enumerate(answers[:len(ANSWER_MAP)]):
+        if answer not in ("A", "B"):
+            continue
+        recent = ANSWER_MAP[index][answer]
+        scores[recent] += 1
+
+    if not recent:
+        return RESULT_TYPES["observer"]
+
     highest = max(scores.values())
-    tied = [key for key, value in scores.items() if value == highest]
-    if len(tied) > 1 and answers:
-        last_pick = mapping[min(len(answers), 5)-1][answers[min(len(answers), 5)-1]]
-        if last_pick in tied:
-            winner = last_pick
-        else:
-            winner = tied[0]
-    else:
-        winner = tied[0]
+    tied = [key for key, score in scores.items() if score == highest]
+    winner = recent if recent in tied else tied[0]
     return RESULT_TYPES[winner]

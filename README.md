@@ -1,21 +1,19 @@
-# ANIMAL PATH — Streamlit starter
+# ANIMAL PATH
+
+동화풍 숲속에서 다섯 번의 선택을 통해 성향을 알아보는 Streamlit 웹 앱입니다.
 
 ## 실행 방법
-1. Python 3.9 이상 설치
-2. 터미널에서 프로젝트 폴더로 이동
-3. 아래 명령 실행
 
 ```bash
-pip install -r requirements.txt
-streamlit run app.py
+python3 -m pip install -r requirements.txt
+python3 -m streamlit run app.py
 ```
 
-## 파일 구성
-- `app.py`: 화면 흐름, UI, CSS 애니메이션
-- `questions.py`: 질문과 선택지
-- `results.py`: 성향 점수 계산 및 결과 유형
-- `requirements.txt`: 필요한 패키지
+## Streamlit Community Cloud 배포
+
+GitHub 저장소의 루트에 `app.py`, `questions.py`, `results.py`, `requirements.txt`가 있어야 합니다.
+Main file path는 `app.py`로 지정하세요.
 
 ## 참고
-현재 버전은 이미지 파일 대신 이모지와 CSS로 숲/캐릭터의 기본 움직임을 표현한 프로토타입입니다.
-실제 동물 일러스트와 스프라이트 애니메이션을 준비하면 `app.py`의 캐릭터 표시 부분을 이미지 기반으로 교체할 수 있습니다.
+
+이 프로젝트는 재미를 위한 성향 콘텐츠이며 전문적인 심리검사가 아닙니다.
