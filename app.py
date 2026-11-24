@@ -104,7 +104,7 @@ def inject_css():
     .question-number {display:flex;justify-content:space-between;align-items:center;color:#8a978a;font-size:.72rem;letter-spacing:.14em;font-weight:700;margin:.2rem 0 .7rem;}
     .question-title {font-size:clamp(1.45rem,4vw,2rem);font-weight:800;letter-spacing:-.045em;line-height:1.45;color:var(--forest);margin:.2rem 0 .7rem;}
     .fork-scene {
-      height:280px;position:relative;overflow:hidden;border-radius:24px;margin:1rem 0 1.35rem;
+      height:320px;position:relative;overflow:hidden;border-radius:24px;margin:1rem 0 1.35rem;
       border:1px solid #d4dfd1;background:#dfe9df;
       box-shadow:inset 0 0 50px rgba(255,255,255,.25);
     }
@@ -184,63 +184,31 @@ def forest_scene(animal=None, fork=False):
         <div class="fork-scene">
           <span class="fork-label left">A · LEFT PATH</span>
           <span class="fork-label right">B · RIGHT PATH</span>
-          <svg class="fork-art" viewBox="0 0 860 280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <svg class="fork-art" viewBox="0 0 860 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
-              <linearGradient id="forkSky" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#dce9e2"/>
-                <stop offset="100%" stop-color="#f0eedf"/>
-              </linearGradient>
-              <linearGradient id="forkMeadow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#b8cbae"/>
-                <stop offset="100%" stop-color="#91aa8d"/>
-              </linearGradient>
-              <linearGradient id="forkDirt" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#f0e3ca"/>
-                <stop offset="100%" stop-color="#d8c5a5"/>
-              </linearGradient>
-              <filter id="pathShadow" x="-20%" y="-20%" width="140%" height="150%">
-                <feGaussianBlur stdDeviation="5"/>
-              </filter>
+              <linearGradient id="forkSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#dce9e2"/><stop offset="100%" stop-color="#e9eadb"/></linearGradient>
+              <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a9bd9d"/><stop offset="100%" stop-color="#718e70"/></linearGradient>
+              <linearGradient id="trail" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e9d9b9"/><stop offset="55%" stop-color="#d9c39f"/><stop offset="100%" stop-color="#c9ae86"/></linearGradient>
+              <linearGradient id="trailLight" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#f4e8cf" stop-opacity=".15"/><stop offset="48%" stop-color="#fff4dc" stop-opacity=".65"/><stop offset="100%" stop-color="#f4e8cf" stop-opacity=".12"/></linearGradient>
+              <filter id="groundShadow" x="-30%" y="-30%" width="160%" height="180%"><feGaussianBlur stdDeviation="7"/></filter>
             </defs>
-            <rect width="860" height="280" fill="url(#forkSky)"/>
-            <circle cx="690" cy="58" r="31" fill="#f2dfaa" opacity=".85"/>
-            <path d="M0 145 Q145 95 275 143 T560 130 T860 132 V280 H0Z" fill="#c4d4bd"/>
-            <path d="M0 175 Q160 126 300 172 T600 162 T860 170 V280 H0Z" fill="url(#forkMeadow)"/>
-            <g opacity=".85">
-              <path d="M0 190 Q80 142 165 184 T340 186 V280 H0Z" fill="#9eb99b"/>
-              <path d="M530 184 Q650 135 760 180 T860 178 V280 H530Z" fill="#a4bd9d"/>
-            </g>
-            <!-- distant forest -->
-            <g fill="#789778" opacity=".72">
-              <path d="M0 160 L35 72 L70 160Z M48 164 L92 58 L136 164Z M112 165 L153 84 L194 165Z"/>
-              <path d="M666 162 L705 70 L744 162Z M718 165 L765 48 L812 165Z M790 165 L827 82 L864 165Z"/>
-            </g>
-            <g fill="#54775d" opacity=".85">
-              <path d="M22 210 L63 104 L104 210Z M73 214 L119 91 L165 214Z"/>
-              <path d="M700 212 L746 91 L792 212Z M760 214 L808 104 L856 214Z"/>
-            </g>
-            <!-- forked trail: shadow, earth edge, then sunlit center -->
-            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="#75896f" stroke-width="112" opacity=".22" filter="url(#pathShadow)"/>
-              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="#75896f" stroke-width="112" opacity=".22" filter="url(#pathShadow)"/>
-              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="#c7b18f" stroke-width="91"/>
-              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="#c7b18f" stroke-width="91"/>
-              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="url(#forkDirt)" stroke-width="79"/>
-              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="url(#forkDirt)" stroke-width="79"/>
-              <path d="M430 302 C430 250 430 214 430 181" stroke="#e9ddc6" stroke-width="72"/>
-            </g>
-            <!-- small stepping stones and flowers -->
-            <g fill="#c8b797" opacity=".55">
-              <ellipse cx="430" cy="246" rx="13" ry="4"/><ellipse cx="428" cy="222" rx="9" ry="3"/>
-              <ellipse cx="426" cy="202" rx="6" ry="2.5"/>
-            </g>
-            <g fill="#f5e8bd">
-              <circle cx="172" cy="208" r="3"/><circle cx="184" cy="218" r="2.5"/>
-              <circle cx="674" cy="210" r="3"/><circle cx="686" cy="220" r="2.5"/>
-            </g>
-            <g fill="#fff3c8" opacity=".9">
-              <circle cx="286" cy="72" r="2.5"/><circle cx="570" cy="54" r="2.5"/><circle cx="615" cy="146" r="2"/>
-            </g>
+            <rect width="860" height="320" fill="url(#forkSky)"/>
+            <circle cx="690" cy="54" r="27" fill="#f4dfaa" opacity=".82"/>
+            <path d="M0 132 Q130 105 245 128 T480 124 T860 126 V320 H0Z" fill="#c1d0b7"/>
+            <path d="M0 158 Q160 125 310 151 T600 145 T860 151 V320 H0Z" fill="url(#ground)"/>
+            <g fill="#779276" opacity=".75"><path d="M0 166 L28 112 L55 166Z M35 166 L69 98 L103 166Z M83 165 L112 119 L141 165Z"/><path d="M690 164 L720 112 L750 164Z M735 165 L772 94 L809 165Z M790 165 L824 119 L858 165Z"/></g>
+            <g fill="#52745a" opacity=".88"><path d="M0 222 L44 105 L88 222Z M48 224 L105 82 L162 224Z"/><path d="M700 224 L755 83 L810 224Z M770 222 L817 108 L864 222Z"/></g>
+            <g fill="#42664e" opacity=".72"><path d="M0 320 L0 190 Q32 148 67 190 L103 320Z"/><path d="M860 320 L757 320 L792 190 Q830 145 860 190Z"/></g>
+            <path d="M286 332 L321 224 Q335 194 393 177 Q367 159 311 148 L111 117 Q91 114 94 101 Q98 88 118 91 L333 119 Q397 128 430 158 Q464 128 529 120 L744 94 Q764 92 768 105 Q771 118 750 121 L549 151 Q494 162 467 180 Q523 195 540 225 L578 332Z" fill="#3f6048" opacity=".28" filter="url(#groundShadow)"/>
+            <path d="M286 332 L321 224 Q335 194 393 177 Q367 159 311 148 L111 117 Q91 114 94 101 Q98 88 118 91 L333 119 Q397 128 430 158 Q464 128 529 120 L744 94 Q764 92 768 105 Q771 118 750 121 L549 151 Q494 162 467 180 Q523 195 540 225 L578 332Z" fill="#b99d75"/>
+            <path d="M299 332 L337 224 Q347 199 407 178 Q375 163 316 153 L119 121 Q105 118 108 105 Q111 98 124 100 L337 128 Q399 137 430 165 Q462 137 526 129 L739 103 Q753 101 756 108 Q758 115 744 117 L545 157 Q493 168 455 187 Q513 204 528 230 L565 332Z" fill="url(#trail)"/>
+            <path d="M365 320 L390 222 Q399 198 430 184 Q460 198 477 230 L501 320Z" fill="url(#trailLight)" opacity=".85"/>
+            <path d="M395 176 Q355 157 313 145 L126 114" fill="none" stroke="#f5e8cf" stroke-width="3" opacity=".55"/>
+            <path d="M465 176 Q507 154 548 145 L741 111" fill="none" stroke="#f5e8cf" stroke-width="3" opacity=".5"/>
+            <g fill="#b69b76" opacity=".42"><ellipse cx="430" cy="286" rx="20" ry="5"/><ellipse cx="429" cy="257" rx="14" ry="4"/><ellipse cx="430" cy="232" rx="9" ry="3"/><ellipse cx="430" cy="211" rx="5" ry="2"/></g>
+            <g fill="#f6e9c8" opacity=".8"><circle cx="205" cy="211" r="3"/><circle cx="220" cy="225" r="2"/><circle cx="660" cy="210" r="3"/><circle cx="646" cy="225" r="2"/><circle cx="286" cy="75" r="2"/><circle cx="570" cy="58" r="2.5"/></g>
+            <g fill="#557956"><path d="M0 320 Q22 276 34 242 Q39 285 53 320Z"/><path d="M48 320 Q65 277 83 258 Q78 297 100 320Z"/><path d="M860 320 Q836 274 825 239 Q820 286 805 320Z"/><path d="M812 320 Q792 281 777 260 Q780 299 758 320Z"/></g>
+            <g fill="#8ba77d"><path d="M22 320 Q35 288 50 278 Q45 305 62 320Z"/><path d="M838 320 Q822 288 808 278 Q813 305 795 320Z"/></g>
           </svg>
           <span class="fork-hint">TAKE A MOMENT · FOLLOW YOUR INSTINCT</span>
         </div>
