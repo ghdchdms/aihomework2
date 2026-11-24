@@ -103,13 +103,21 @@ def inject_css():
     .animal-desc {font-size:.74rem;color:#8b958a;line-height:1.5;margin-top:.35rem;}
     .question-number {display:flex;justify-content:space-between;align-items:center;color:#8a978a;font-size:.72rem;letter-spacing:.14em;font-weight:700;margin:.2rem 0 .7rem;}
     .question-title {font-size:clamp(1.45rem,4vw,2rem);font-weight:800;letter-spacing:-.045em;line-height:1.45;color:var(--forest);margin:.2rem 0 .7rem;}
-    .fork-scene {height:220px;position:relative;overflow:hidden;border-radius:22px;margin:1rem 0 1.3rem;background:linear-gradient(#dce8df 0%,#e8ebdc 58%,#bdcdaa 59%,#a4b994 100%);border:1px solid #d6dfd0;}
-    .fork-path {position:absolute;bottom:-65px;left:39%;width:22%;height:180px;background:#e8d9bd;border-radius:50% 50% 0 0;}
-    .fork-left,.fork-right {position:absolute;bottom:35px;width:40%;height:95px;border-top:17px solid #e8d9bd;border-radius:50% 50% 0 0;}
-    .fork-left {left:4%;transform:rotate(-22deg);}.fork-right {right:4%;transform:rotate(22deg);}
-    .fork-tree {position:absolute;bottom:48px;font-size:3.4rem;z-index:2;}
-    .fork-tree.l{left:8%;}.fork-tree.r{right:8%;}
-    .fork-spark {position:absolute;top:22px;left:50%;transform:translateX(-50%);font-size:1.5rem;animation:twinkle 2s ease-in-out infinite;}
+    .fork-scene {
+      height:280px;position:relative;overflow:hidden;border-radius:24px;margin:1rem 0 1.35rem;
+      border:1px solid #d4dfd1;background:#dfe9df;
+      box-shadow:inset 0 0 50px rgba(255,255,255,.25);
+    }
+    .fork-art {position:absolute;inset:0;width:100%;height:100%;display:block;}
+    .fork-label {
+      position:absolute;z-index:4;top:17px;padding:.43rem .72rem;border-radius:99px;
+      background:rgba(255,254,249,.88);border:1px solid rgba(255,255,255,.75);
+      color:#506b55;font-size:.65rem;font-weight:800;letter-spacing:.16em;
+      box-shadow:0 4px 14px rgba(45,67,48,.08);
+    }
+    .fork-label.left {left:7%;}.fork-label.right {right:7%;}
+    .fork-hint {position:absolute;z-index:4;bottom:14px;left:0;right:0;text-align:center;
+      color:#758574;font-size:.62rem;letter-spacing:.18em;font-weight:800;text-shadow:0 1px 5px rgba(255,255,255,.8);}
     .choice-wrap {background:rgba(255,254,249,.9);border:1px solid #e4e8df;border-radius:20px;padding:1.1rem 1.1rem .8rem;min-height:145px;transition:all .25s;}
     .choice-wrap:hover {border-color:#b8c9b0;transform:translateY(-3px);box-shadow:0 12px 28px rgba(49,68,51,.07);}
     .choice-symbol {font-size:1.7rem;margin-bottom:.4rem;}
@@ -174,10 +182,67 @@ def forest_scene(animal=None, fork=False):
     if fork:
         st.markdown("""
         <div class="fork-scene">
-          <div class="fork-spark">✦</div>
-          <div class="fork-tree l">🌳</div><div class="fork-tree r">🌲</div>
-          <div class="fork-path"></div><div class="fork-left"></div><div class="fork-right"></div>
-          <div class="firefly f1"></div><div class="firefly f2"></div>
+          <span class="fork-label left">A · LEFT PATH</span>
+          <span class="fork-label right">B · RIGHT PATH</span>
+          <svg class="fork-art" viewBox="0 0 860 280" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs>
+              <linearGradient id="forkSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#dce9e2"/>
+                <stop offset="100%" stop-color="#f0eedf"/>
+              </linearGradient>
+              <linearGradient id="forkMeadow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#b8cbae"/>
+                <stop offset="100%" stop-color="#91aa8d"/>
+              </linearGradient>
+              <linearGradient id="forkDirt" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f0e3ca"/>
+                <stop offset="100%" stop-color="#d8c5a5"/>
+              </linearGradient>
+              <filter id="pathShadow" x="-20%" y="-20%" width="140%" height="150%">
+                <feGaussianBlur stdDeviation="5"/>
+              </filter>
+            </defs>
+            <rect width="860" height="280" fill="url(#forkSky)"/>
+            <circle cx="690" cy="58" r="31" fill="#f2dfaa" opacity=".85"/>
+            <path d="M0 145 Q145 95 275 143 T560 130 T860 132 V280 H0Z" fill="#c4d4bd"/>
+            <path d="M0 175 Q160 126 300 172 T600 162 T860 170 V280 H0Z" fill="url(#forkMeadow)"/>
+            <g opacity=".85">
+              <path d="M0 190 Q80 142 165 184 T340 186 V280 H0Z" fill="#9eb99b"/>
+              <path d="M530 184 Q650 135 760 180 T860 178 V280 H530Z" fill="#a4bd9d"/>
+            </g>
+            <!-- distant forest -->
+            <g fill="#789778" opacity=".72">
+              <path d="M0 160 L35 72 L70 160Z M48 164 L92 58 L136 164Z M112 165 L153 84 L194 165Z"/>
+              <path d="M666 162 L705 70 L744 162Z M718 165 L765 48 L812 165Z M790 165 L827 82 L864 165Z"/>
+            </g>
+            <g fill="#54775d" opacity=".85">
+              <path d="M22 210 L63 104 L104 210Z M73 214 L119 91 L165 214Z"/>
+              <path d="M700 212 L746 91 L792 212Z M760 214 L808 104 L856 214Z"/>
+            </g>
+            <!-- forked trail: shadow, earth edge, then sunlit center -->
+            <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="#75896f" stroke-width="112" opacity=".22" filter="url(#pathShadow)"/>
+              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="#75896f" stroke-width="112" opacity=".22" filter="url(#pathShadow)"/>
+              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="#c7b18f" stroke-width="91"/>
+              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="#c7b18f" stroke-width="91"/>
+              <path d="M430 302 C426 245 420 208 419 181 C414 153 350 119 238 92" stroke="url(#forkDirt)" stroke-width="79"/>
+              <path d="M430 302 C434 245 440 208 441 181 C449 151 522 119 635 91" stroke="url(#forkDirt)" stroke-width="79"/>
+              <path d="M430 302 C430 250 430 214 430 181" stroke="#e9ddc6" stroke-width="72"/>
+            </g>
+            <!-- small stepping stones and flowers -->
+            <g fill="#c8b797" opacity=".55">
+              <ellipse cx="430" cy="246" rx="13" ry="4"/><ellipse cx="428" cy="222" rx="9" ry="3"/>
+              <ellipse cx="426" cy="202" rx="6" ry="2.5"/>
+            </g>
+            <g fill="#f5e8bd">
+              <circle cx="172" cy="208" r="3"/><circle cx="184" cy="218" r="2.5"/>
+              <circle cx="674" cy="210" r="3"/><circle cx="686" cy="220" r="2.5"/>
+            </g>
+            <g fill="#fff3c8" opacity=".9">
+              <circle cx="286" cy="72" r="2.5"/><circle cx="570" cy="54" r="2.5"/><circle cx="615" cy="146" r="2"/>
+            </g>
+          </svg>
+          <span class="fork-hint">TAKE A MOMENT · FOLLOW YOUR INSTINCT</span>
         </div>
         """, unsafe_allow_html=True)
     else:
